@@ -21,7 +21,27 @@ public class Utility {
 	}
 	
 	public HashMap<String, Integer>  findTopScorer(Search search){
-		return null;
+		HashMap<String, ArrayList<Integer>> results = search.returnAll();
+				
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+				
+		Integer maxScore = 0;
+		String maxPlayer = "";
+		for(String player: results.keySet()){
+			Integer score = results.get(player).get(1);
+			if (score > maxScore)
+			{
+				maxScore = score;
+				maxPlayer = player;
+			}
+		}
+		
+		if (maxPlayer != "" && maxScore != 0)
+		{
+			map.put(maxPlayer, maxScore);
+		}
+				
+		return map;
 	}
 	
 }

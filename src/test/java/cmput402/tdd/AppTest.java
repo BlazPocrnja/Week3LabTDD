@@ -64,4 +64,32 @@ public class AppTest
     	assert(1.875f == results.get("ronaldo"));
     	assert(1.6f == results.get("neymar"));
     }
+    
+    public void testFindTopScorer() {
+    	Search mockSearch = mock(Search.class);
+    	HashMap<String, ArrayList<Integer>> fakeMap = new HashMap<String, ArrayList<Integer>>();
+    	
+    	ArrayList<Integer> messi = new ArrayList<Integer>();
+    	messi.add(100);
+    	messi.add(200);
+    	
+    	ArrayList<Integer> ronaldo = new ArrayList<Integer>();
+    	ronaldo.add(80);
+    	ronaldo.add(150);
+    	
+    	ArrayList<Integer> neymar = new ArrayList<Integer>();
+    	neymar.add(50);
+    	neymar.add(80);
+    	
+    	fakeMap.put("messi", messi);
+    	fakeMap.put("ronaldo", ronaldo);
+    	fakeMap.put("neymar", neymar);
+    	
+    	when(mockSearch.returnAll()).thenReturn(fakeMap);
+    	
+    	HashMap<String, Integer> results = this.util.findTopScorer(mockSearch);
+    	
+    	assert(200 == results.get("messi"));
+    	assert(1 == results.size());
+    }
 }
